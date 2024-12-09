@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mystery"
+version = "0.1.0"
+description = "A Python package named mystery"
+authors = [
+    { name = "Your Name", email = "your.email@example.com" }
+]
+license = { text = "MIT" }
+dependencies = []  # Add any runtime dependencies here
+
+[tool.setuptools]
+packages = ["mystery"]
+
+[tool.pytest.ini_options]
+addopts = [
+  "--cov",
+  "--cov-config=pyproject.toml",
+]
+
+[tool.coverage.run]
+#branch = true
+parallel = true
+source = ["mystery"]
+#data_file = ".pytest_cache/.coverage"
