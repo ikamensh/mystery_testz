@@ -25,4 +25,4 @@ addopts = [
 #branch = true
 parallel = true
 source = ["mystery"]
-#data_file = ".pytest_cache/.coverage"
+data_file = ".pytest_cache/.coverage"

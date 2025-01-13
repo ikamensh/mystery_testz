@@ -1,0 +1,30 @@
+name: ci-pipeline
+on: ["push"]
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  update-requirements:
+    runs-on: [ self-hosted, Linux, internet ]
+    container:
+      image: python:3.11-slim
+    timeout-minutes: 30
+    permissions:
+      # Permission to commit and push changes to a branch
+      contents: write
+
+    steps:
+
+      - name: Run tests 2
+          ls -la
+          echo "running cp command"
+          cp .pytest_cache/.coverage .pytest_cache/.coverage_cpu
+          poetry run pytest -m "cuda and not ubfm" --ignore tests/regression --slow-last --durations=0 --durations-min=5
+          cp .pytest_cache/.coverage .pytest_cache/.coverage_cuda
+
+      - name: install git
+        run: |
+          ls -la
+          cp blo bla

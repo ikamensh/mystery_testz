@@ -53,3 +53,41 @@ def allow_cuda(request):
             yield
         finally:
             os.environ["CUDA_VISIBLE_DEVICES"] = ""
+
+import os
+import datetime
+
+init_time = str(datetime.datetime.now())[:-8]
+folder_name = init_time
+os.makedirs(folder_name, exist_ok=True)
+print("logging placement in", os.path.abspath(folder_name))
+
+@pytest.fixture(autouse=True)
+def my_logging(request, worker_id):
+    """Only allow CUDA usage to tests decorated with `@pytest.mark.xdist_group(name="gpu")`.
+
+    This is needed to allow multi-processed execution of tests.
+    Without this, it would be hard to trace which test led to concurrent usage of GPU.
+    Allowing concurrent usage of GPU is error-prone due to running out of memory.
+
+    When user forgets to use the gpu decorator but uses GPU,
+    some of the following errors are expected:
+        * "Attempting to deserialize object on CUDA device 0 but torch.cuda.device_count() is 0",
+        * "No CUDA GPUs are available"
+        * "invalid literal for int() with base 10: ''"
+    """
+
+
+    filename = os.path.join(folder_name, f"{worker_id}_log.txt")
+    with open(filename, "a") as f:
+        f.write(request.node.name+"\n")
+
+
+@pytest.fixture(scope="module")
+def checker(request):
+    request.node.session.items
+    return "RUNNER"
+
+@pytest.fixture(scope="module")
+def runner(checker):
+    return "RUNNER"
