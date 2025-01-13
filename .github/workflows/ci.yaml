@@ -33,7 +33,9 @@ jobs:
           pytest -m "not cuda" || true
           cp .pytest_cache/.coverage .pytest_cache/.coverage_cuda
 
-      - name: install git
+      - name: Run coverage
         run: |
-          ls -la
-          cp blo bla
+          poetry run coverage combine .pytest_cache/.coverage_cuda .pytest_cache/.coverage_cpu
+          poetry run coverage xml
+          poetry run coverage html
+          poetry run coverage report
