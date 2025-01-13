@@ -6,8 +6,7 @@ defaults:
     shell: bash
 
 jobs:
-  update-requirements:
-    runs-on: [ self-hosted, Linux, internet ]
+  test:
     container:
       image: python:3.11-slim
     timeout-minutes: 30
