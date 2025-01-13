@@ -16,9 +16,15 @@ jobs:
       contents: write
 
     steps:
+      -
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Run tests 2
+        run: |
+          pip install pytest
           ls -la
+          pytest
           echo "running cp command"
           cp .pytest_cache/.coverage .pytest_cache/.coverage_cpu
           poetry run pytest -m "cuda and not ubfm" --ignore tests/regression --slow-last --durations=0 --durations-min=5
