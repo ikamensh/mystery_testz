@@ -35,7 +35,7 @@ jobs:
 
       - name: Run coverage
         run: |
-          poetry run coverage combine .pytest_cache/.coverage_cuda .pytest_cache/.coverage_cpu
-          poetry run coverage xml
-          poetry run coverage html
-          poetry run coverage report
+          coverage combine .pytest_cache/.coverage_cuda .pytest_cache/.coverage_cpu
+          coverage xml
+          coverage html
+          coverage report
