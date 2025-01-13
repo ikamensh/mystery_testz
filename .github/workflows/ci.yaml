@@ -7,9 +7,9 @@ defaults:
 
 jobs:
   tests:
-    runs-on: [Linux]
-    container:
-      image: python:3.11-slim
+    runs-on:
+      python-version: "3.11"
+      os: ubuntu-latest
     timeout-minutes: 30
     permissions:
       # Permission to commit and push changes to a branch
