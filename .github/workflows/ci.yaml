@@ -25,6 +25,7 @@ jobs:
       - name: Run tests 2
         run: |
           pip install pytest pytest-cov
+          pip install -e .
           ls -la
           pytest
           echo "running cp command"
