@@ -6,7 +6,8 @@ defaults:
     shell: bash
 
 jobs:
-  test:
+  tests:
+    runs-on: [Linux]
     container:
       image: python:3.11-slim
     timeout-minutes: 30
